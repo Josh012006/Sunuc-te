@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
+import type { TooltipProps } from "recharts"
 
 import { cn } from "./utils"
 
@@ -62,7 +63,7 @@ function ChartContainer({
         <ChartStyle id={chartId} config={config} />
 
         <RechartsPrimitive.ResponsiveContainer width="100%" height="100%">
-          {children}
+          {children as any}
         </RechartsPrimitive.ResponsiveContainer>
       </div>
     </ChartContext.Provider>
@@ -99,8 +100,7 @@ function ChartTooltipContent({
   payload,
   label,
   className,
-}: React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
-  React.ComponentProps<"div">) {
+}: TooltipProps<number, string> & React.ComponentProps<"div">) {
   const { config } = useChart()
 
   if (!active || !payload?.length) return null
